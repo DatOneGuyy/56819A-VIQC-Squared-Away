@@ -13,7 +13,13 @@ task main() {
 	while (true) {
 		setMotorSpeed(leftdrive, getJoystickValue(ChA));
 		setMotorSpeed(rightdrive, getJoystickValue(ChD));
-		setMotorSpeed(strafe, 0.5 * getJoystickValue(ChB) + 0.5 * getJoystickValue(ChC));
+		if (abs(getJoystickValue(ChB)) > abs(getJoystickValue(ChC))) {
+			setMotorSpeed(strafe, getJoystickValue(ChB));
+		} else if (abs(getJoystickValue(ChC)) > abs(getJoystickValue(ChB))) {
+			setMotorSpeed(strafe, getJoystickValue(ChC));
+		} else {
+			setMotorSpeed(strafe, getJoystickValue(ChC) * 0.5 + getJoystickValue(ChB) * 0.5);
+		}
 		
 		if (leftarm * 0.5 + rightarm * 0.5 < 260 && getJoystickValue(BtnRUp) == 1 && getJoystickValue(BtnRDown) == 0) {
 			setMotorSpeed(armleft, 100);
