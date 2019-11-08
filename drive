@@ -79,10 +79,10 @@ void arm(int time, int speed) {
 }
 
 void stack() {
-	forward(400, 60);
+	forward(500, 60);
 	s(1000, -100);
-	turnRight(30, 30);
-	forward(1400, 35);
+	turnRight(28, 30);
+	forward(1500, 35);
 	arm(600, 80);
 	turnLeft(20, 17);
 	forward(1700, -60);
