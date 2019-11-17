@@ -1,6 +1,3 @@
-task main()
-{
-	
 #pragma config(Sensor, port1,  color2,         sensorVexIQ_LED)
 #pragma config(Sensor, port2,  color1,         sensorVexIQ_LED)
 #pragma config(Sensor, port3,  gyro,           sensorVexIQ_Gyro)
@@ -281,4 +278,3 @@ task main()
 
 
 
-}
