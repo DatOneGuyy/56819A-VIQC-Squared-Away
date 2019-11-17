@@ -177,7 +177,19 @@ int t = 0;
 int mode = 0;
 int larm;
 
-int dropState = 0;
+int sign(int value) {
+	return value == 0 ? 0 : abs(value) / value;
+}
+
+bool checkIfZero() { //false if one is zero true if both are not zero
+	return getJoystickValue(ChA) != 0 && getJoystickValue(ChD) != 0;
+}
+
+int leftspeed;
+int rightspeed;
+
+int released1 = 0;
+int released2 = 0;
 
 task main() {
 	hogCPU();
@@ -210,18 +222,16 @@ task main() {
 		}
 
 		displayCenteredTextLine(1, "%d", larm);
-
-		setMotorSpeed(leftdrive, gear ? mapFast(getJoystickValue(ChA)) : mapSlow(getJoystickValue(ChA)));
-		setMotorSpeed(rightdrive, gear ? mapFast(getJoystickValue(ChD)) : mapSlow(getJoystickValue(ChD)));
+		
 		setMotorSpeed(strafe, 0.5 * abs(getJoystickValue(ChB)) >= 40 ? getJoystickValue(ChB) : 0 + 0.5 * abs(getJoystickValue(ChC)) >= 40 ? getJoystickValue(ChC) : 0);
 
 		if (getJoystickValue(BtnFUp) == 1) {
 			setup();
 		}
 
-		if (getJoystickValue(BtnLUp) == 1 && getJoystickValue(BtnLDown) == 0) {
+		if (getJoystickValue(BtnLUp) == 1 && getJoystickValue(BtnLDown) == 0 && larm < 610) {
 			setMotorSpeed(arm, 100);
-		} else if (getJoystickValue(BtnLDown) == 1 && getJoystickValue(BtnLUp) == 0) {
+		} else if (getJoystickValue(BtnLDown) == 1 && getJoystickValue(BtnLUp) == 0 && larm > 0) {
 			setMotorSpeed(arm, -100);
 		} else {
 			setMotorSpeed(arm, 0);
@@ -234,43 +244,31 @@ task main() {
 		}
 
 		if (getJoystickValue(BtnFDown) == 1) {
-			dropState = 1;
+			setMotorSpeed(dropper, 30);
+			sleep(400);
+			setMotorSpeed(dropper, -30);
+			sleep(400);
+			setMotorSpeed(dropper, 0);
 		}
-
-		switch (dropState) {
-			case 0:
-				dropState = 0;
-				break;
-			case 1:
-				resetMotorEncoder(dropper);
-				if (abs(getMotorEncoder(dropper)) >= 88) {
-					dropState = 2;
-					setMotorSpeed(dropper, 0);
-					sleep(150);
-				} else {
-					setMotorSpeed(dropper, 30);
-				}
-				break;
-			case 2:
-				if (abs(getMotorEncoder(dropper)) <= 2) {
-					dropState = 0;
-				} else {
-					setMotorSpeed(dropper, -30);
-				}
-				break;
-			default:
-				dropState = 0;
-				break;
-		}
-
-		if (getJoystickValue(BtnRUp) == 1 && getJoystickValue(BtnRDown) == 0) {
+		
+		if (getJoystickValue(BtnRDown) == 1 && getJoystickValue(BtnRUp) == 0) {
 			setMotorSpeed(spintake, 100);
-		} else if (getJoystickValue(BtnRDown) == 1 && getJoystickValue(BtnRUp) == 0) {
+		} else if (getJoystickValue(BtnRUp) == 1 && getJoystickValue(BtnRDown) == 0) {
 			setMotorSpeed(spintake, -100);
 		} else {
 			setMotorSpeed(spintake, 0);
 		}
-
-
+		
+		if (checkIfZero() && abs(getJoystickValue(ChA) - getJoystickValue(ChD)) <= 25 && sign(getJoystickValue(ChA)) == sign(getJoystickValue(ChD))) {
+			leftspeed = (gear ? 1 : 0.45) * (getJoystickValue(ChA) / 2 + getJoystickValue(ChD) / 2);
+			rightspeed = (gear ? 1 : 0.45) * (getJoystickValue(ChA) / 2 + getJoystickValue(ChD) / 2);
+		} else {
+			leftspeed = getJoystickValue(ChA) * (gear ? 1 : 0.45);
+			rightspeed = getJoystickValue(ChD) * (gear ? 1 : 0.45);
+		}
+		
+		setMotorSpeed(leftdrive, leftspeed);
+		setMotorSpeed(rightdrive, rightspeed);
+		
 	}
 }
