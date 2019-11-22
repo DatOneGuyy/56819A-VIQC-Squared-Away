@@ -203,23 +203,36 @@ task main() {
 			if (t % k * 6 < k ) {
 				setTouchLEDColor(color1, colorRed);
 				setTouchLEDColor(color2, colorRed);
+				setTouchLEDColor(color3, colorRed);
+				setTouchLEDColor(color4, colorRed);
 			} else if (t % k * 6 < 2 * k) {
 				setTouchLEDColor(color1, colorOrange);
 				setTouchLEDColor(color2, colorOrange);
+				setTouchLEDColor(color3, colorOrange);
+				setTouchLEDColor(color4, colorOrange);
 			} else if (t % k * 6 < 3 * k) {
 				setTouchLEDColor(color1, colorYellow);
 				setTouchLEDColor(color2, colorYellow);
+				setTouchLEDColor(color3, colorYellow);
+				setTouchLEDColor(color4, colorYellow);
 			} else if (t % k * 6 < 4 * k) {
 				setTouchLEDColor(color1, colorGreen);
 				setTouchLEDColor(color2, colorGreen);
+				setTouchLEDColor(color3, colorGreen);
+				setTouchLEDColor(color4, colorGreen);
 			} else if (t % k * 6 < 5 * k) {
 				setTouchLEDColor(color1, colorBlue);
 				setTouchLEDColor(color2, colorBlue);
+				setTouchLEDColor(color3, colorBlue);
+				setTouchLEDColor(color4, colorBlue);
 			} else {
 				setTouchLEDColor(color1, colorViolet);
 				setTouchLEDColor(color2, colorViolet);
+				setTouchLEDColor(color3, colorViolet);
+				setTouchLEDColor(color4, colorViolet);
 			}
 		}
+		
 
 		displayCenteredTextLine(1, "%d", larm);
 
