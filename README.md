@@ -1,6 +1,15 @@
 # iq-code
 vex iq code for squared away
 
+current specs (11-28-19)
+2 motor drive (omnis)
+1 motor strafe
+1 motor 2 bar lift
+1 motor 2 bar lift (back)
+1 rubber band intake
+gyro sensor
+4 touch leds
+
 current specs (11-8-19)
 2 motor drive (omnis)
 1 motor strafe
@@ -25,13 +34,13 @@ back thingy for grab cubes
 hook in front
 
 capabilities:
-stack cubes on low platform
-hang cubes from high platform
+stack cubes on low and high platform
 carry two red/blue cubes at once
 push balls into cube with back pusher
-40 point programming skills (2 green cubes)
-~70 point driver skills
-~110 point robot skills total
+intake balls, stack balls on top with passive drop
+80 point programming skills (3 green cubes, 2 blue cubes)
+~80 point driver skills
+~160 point robot skills total
 
 teamwork challenge strategies:
 heavy focus on green cubes
