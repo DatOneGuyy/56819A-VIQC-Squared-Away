@@ -3,6 +3,7 @@
 #pragma config(Sensor, port3,  gyro,           sensorVexIQ_Gyro)
 #pragma config(Sensor, port4,  color3,         sensorVexIQ_LED)
 #pragma config(Sensor, port11, color4,         sensorVexIQ_LED)
+#pragma config(Sensor, port12, color5,         sensorVexIQ_LED)
 #pragma config(Motor,  motor5,          arm,           tmotorVexIQ, PIDControl, encoder)
 #pragma config(Motor,  motor6,          backarm,       tmotorVexIQ, PIDControl, reversed, encoder)
 #pragma config(Motor,  motor7,          strafe,        tmotorVexIQ, PIDControl, encoder)
@@ -46,106 +47,7 @@ void driveReset() {
 	resetMotorEncoder(strafe);
 }
 
-void forward(int ticks, int speed) {
-	driveReset();
-	while (abs(ticks) > abs(getMotorEncoder(leftdrive)) * 0.5 + abs(getMotorEncoder(rightdrive)) * 0.5) {
-		setMotorSpeed(leftdrive, speed);
-		setMotorSpeed(rightdrive, speed);
-	}
-	driveReset();
-}
 
-void turnLeft(int degrees, int speed) {
-	setup();
-	while (abs(degrees) > abs(getGyroDegrees(gyro))) {
-		setMotorSpeed(leftdrive, speed);
-		setMotorSpeed(rightdrive, -speed);
-	}
-	driveReset();
-}
-
-void turnRight(int degrees, int speed) {
-	setup();
-	while (abs(degrees) > abs(getGyroDegrees(gyro))) {
-		setMotorSpeed(leftdrive, -speed);
-		setMotorSpeed(rightdrive, speed);
-	}
-	driveReset();
-}
-
-//true = left, false = right
-//ticks > 0 and speed > 0
-void s(int ticks, int speed, bool dir) {
-	driveReset();
-	while (ticks > abs(getMotorEncoder(strafe))) {
-		setMotorSpeed(strafe, speed * dir ? -1 : 1);
-	}
-	driveReset();
-}
-
-void a(int ticks, int speed) {
-	setup();
-	setMotorSpeed(arm, speed);
-	sleep(ticks);
-	setMotorSpeed(arm, 0);
-	setup();
-}
-
-void togglesucking() {
-	if (!sucking) {
-		setMotorSpeed(spintake, 127);
-	} else {
-		setMotorSpeed(spintake, 0);
-	}
-}
-
-void togglebarfing() {
-	if (!barfing) {
-		setMotorSpeed(spintake, -127);
-	} else {
-		setMotorSpeed(spintake, 0);
-	}
-}
-
-void drop() {
-	setup();
-	while (abs(getMotorEncoder(backarm)) < 90) {
-		setMotorSpeed(backarm, 30);
-	}
-	sleep(dropDelay);
-	while (abs(getMotorEncoder(backarm)) > 0) {
-		setMotorSpeed(backarm, -30);
-	}
-	setup();
-}
-
-void stack() { //deprecated
-	forward(500, 60);
-	s(1000, -100, true);
-	turnRight(28, 30);
-	forward(1500, 35);
-	a(600, 80);
-	turnLeft(20, 17);
-	forward(1700, -60);
-	a(600, -80);
-	a(600, 80);
-	s(850, 100, false);
-	forward(3800, 40);
-	a(400, -80);
-	forward(300, -40);
-}
-
-void stack2() { //deprecated
-	forward(400, 60);
-	s(1000, 100, false);
-	turnLeft(30, 30);
-	forward(1400, 40);
-	a(600, 80);
-	turnRight(20, 17);
-	forward(1700, 60);
-	a(300, -80);
-	forward(250, -50);
-}
 
 int mapFast(int value) {
 	float A = 633.992;
@@ -181,15 +83,13 @@ int sign(int value) {
 	return value == 0 ? 0 : abs(value) / value;
 }
 
-bool checkIfZero() { //false if one is zero true if both are not zero
-	return getJoystickValue(ChA) != 0 && getJoystickValue(ChD) != 0;
-}
-
 int leftspeed;
 int rightspeed;
 
 int released1 = 0;
 int released2 = 0;
+
+int temp = 0;
 
 task main() {
 	hogCPU();
@@ -205,34 +105,40 @@ task main() {
 				setTouchLEDColor(color2, colorRed);
 				setTouchLEDColor(color3, colorRed);
 				setTouchLEDColor(color4, colorRed);
+				setTouchLEDColor(color5, colorRed);
 			} else if (t % k * 6 < 2 * k) {
 				setTouchLEDColor(color1, colorOrange);
 				setTouchLEDColor(color2, colorOrange);
 				setTouchLEDColor(color3, colorOrange);
 				setTouchLEDColor(color4, colorOrange);
+				setTouchLEDColor(color5, colorOrange);
 			} else if (t % k * 6 < 3 * k) {
 				setTouchLEDColor(color1, colorYellow);
 				setTouchLEDColor(color2, colorYellow);
 				setTouchLEDColor(color3, colorYellow);
 				setTouchLEDColor(color4, colorYellow);
+				setTouchLEDColor(color5, colorYellow);
 			} else if (t % k * 6 < 4 * k) {
 				setTouchLEDColor(color1, colorGreen);
 				setTouchLEDColor(color2, colorGreen);
 				setTouchLEDColor(color3, colorGreen);
 				setTouchLEDColor(color4, colorGreen);
+				setTouchLEDColor(color5, colorGreen);
 			} else if (t % k * 6 < 5 * k) {
 				setTouchLEDColor(color1, colorBlue);
 				setTouchLEDColor(color2, colorBlue);
 				setTouchLEDColor(color3, colorBlue);
 				setTouchLEDColor(color4, colorBlue);
+				setTouchLEDColor(color5, colorBlue);
 			} else {
 				setTouchLEDColor(color1, colorViolet);
 				setTouchLEDColor(color2, colorViolet);
 				setTouchLEDColor(color3, colorViolet);
 				setTouchLEDColor(color4, colorViolet);
+				setTouchLEDColor(color5, colorViolet);
 			}
 		}
-		
+
 
 		displayCenteredTextLine(1, "%d", larm);
 
@@ -257,7 +163,7 @@ task main() {
 		} else if (getJoystickValue(BtnEUp) == 1 && getJoystickValue(BtnEDown) == 1) {
 			setMotorSpeed(spintake, 0);
 		}
-			
+
 
 		if (getJoystickValue(BtnFDown) == 1) {
 			setMotorSpeed(backarm, 30);
@@ -275,14 +181,18 @@ task main() {
 			setMotorSpeed(backarm, 0);
 		}
 
-		if (checkIfZero() && abs(getJoystickValue(ChA) - getJoystickValue(ChD)) <= 25 && sign(getJoystickValue(ChA)) == sign(getJoystickValue(ChD))) {
-			leftspeed = (gear ? 1 : 0.45) * (getJoystickValue(ChA) / 2 + getJoystickValue(ChD) / 2);
-			rightspeed = (gear ? 1 : 0.45) * (getJoystickValue(ChA) / 2 + getJoystickValue(ChD) / 2);
-		} else {
-			leftspeed = getJoystickValue(ChA) * (gear ? 1 : 0.45);
-			rightspeed = getJoystickValue(ChD) * (gear ? 1 : 0.45);
-		}
+		leftspeed = getJoystickValue(ChA) * getJoystickValue(ChA) * getJoystickValue(ChA) / 10000 * (gear ? 1 : 0.6);
+		rightspeed = getJoystickValue(ChD) * getJoystickValue(ChD) * getJoystickValue(ChD) / 10000 * (gear ? 1 : 0.6);
 
+		if (sign(leftspeed) == sign(rightspeed) && abs(leftspeed - rightspeed) < (getJoystickValue(BtnLUp) == 1 ? 40 : 20)) {
+			temp = leftspeed * 0.5 + rightspeed * 0.5;
+			leftspeed = temp;
+			rightspeed = temp;
+		}
+		if (getMotorSpeed(strafe) > 50 && abs(leftspeed) < 70 && abs(rightspeed) < 70) {
+			leftspeed = 0;
+			rightspeed = 0;
+		}
 		setMotorSpeed(leftdrive, leftspeed);
 		setMotorSpeed(rightdrive, rightspeed);
 
