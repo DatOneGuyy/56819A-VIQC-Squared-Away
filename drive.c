@@ -90,6 +90,7 @@ int released1 = 0;
 int released2 = 0;
 
 int temp = 0;
+int spintakedirection = 0;
 
 task main() {
 	hogCPU();
@@ -142,7 +143,7 @@ task main() {
 
 		displayCenteredTextLine(1, "%d", larm);
 
-		setMotorSpeed(strafe, 0.5 * abs(getJoystickValue(ChB)) >= 40 ? getJoystickValue(ChB) : 0 + 0.5 * abs(getJoystickValue(ChC)) >= 40 ? getJoystickValue(ChC) : 0);
+		setMotorSpeed(strafe, (0.5 * abs(getJoystickValue(ChB)) >= 40 ? getJoystickValue(ChB) : 0 + 0.5 * abs(getJoystickValue(ChC)) >= 40 ? getJoystickValue(ChC) : 0) * 0.5);
 
 		if (getJoystickValue(BtnFUp) == 1) {
 			setup();
@@ -150,27 +151,30 @@ task main() {
 
 		if (getJoystickValue(BtnLUp) == 1 && getJoystickValue(BtnLDown) == 0) {
 			setMotorSpeed(arm, 100);
-		} else if (getJoystickValue(BtnLDown) == 1 && getJoystickValue(BtnLUp) == 0) {
+			if (getMotorEncoder(arm) < 600) {
+				setMotorSpeed(spintake, -40);
+				spintakedirection = 0;
+			}
+		} else if (getJoystickValue(BtnLDown) == 1 && getJoystickValue(BtnLUp) == 0 && (getMotorEncoder(arm) > 10 || getJoystickValue(BtnFUp) == 1)) {
 			setMotorSpeed(arm, -100);
+			setMotorSpeed(spintake, 40);
+			spintakedirection = 0;
 		} else {
 			setMotorSpeed(arm, 0);
+			if (spintakedirection == 0) {
+				setMotorSpeed(spintake, 0);
+			}
 		}
 
 		if (getJoystickValue(BtnEUp) == 1 && getJoystickValue(BtnEDown) == 0) {
 			setMotorSpeed(spintake, 100);
+			spintakedirection = 1;
 		} else if (getJoystickValue(BtnEDown) == 1 && getJoystickValue(BtnEUp) == 0) {
 			setMotorSpeed(spintake, -100);
+			spintakedirection = -1;
 		} else if (getJoystickValue(BtnEUp) == 1 && getJoystickValue(BtnEDown) == 1) {
 			setMotorSpeed(spintake, 0);
-		}
-
-
-		if (getJoystickValue(BtnFDown) == 1) {
-			setMotorSpeed(backarm, 30);
-			sleep(400);
-			setMotorSpeed(backarm, -30);
-			sleep(400);
-			setMotorSpeed(backarm, 0);
+			spintakedirection = 0;
 		}
 
 		if (getJoystickValue(BtnRDown) == 1 && getJoystickValue(BtnRUp) == 0) {
@@ -184,7 +188,7 @@ task main() {
 		leftspeed = getJoystickValue(ChA) * getJoystickValue(ChA) * getJoystickValue(ChA) / 10000 * (gear ? 1 : 0.6);
 		rightspeed = getJoystickValue(ChD) * getJoystickValue(ChD) * getJoystickValue(ChD) / 10000 * (gear ? 1 : 0.6);
 
-		if (sign(leftspeed) == sign(rightspeed) && abs(leftspeed - rightspeed) < (getJoystickValue(BtnLUp) == 1 ? 40 : 20)) {
+		if (sign(leftspeed) == sign(rightspeed) && abs(leftspeed - rightspeed) < (getJoystickValue(BtnLUp) == 1 ? 50 : 30)) {
 			temp = leftspeed * 0.5 + rightspeed * 0.5;
 			leftspeed = temp;
 			rightspeed = temp;
