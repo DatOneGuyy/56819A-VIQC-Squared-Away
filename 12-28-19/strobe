@@ -130,13 +130,7 @@ task main() {
 
 		leftspeed = pow(getJoystickValue(ChA), 3) / 10000 * (gear ? 1 : 0.6) * (abs(getJoystickValue(ChA)) > 10 ? 1 : 0);
 		rightspeed = pow(getJoystickValue(ChD), 3) / 10000 * (gear ? 1 : 0.6) * (abs(getJoystickValue(ChD)) > 10 ? 1 : 0);
-
-		if (((sign(leftspeed) == sign(rightspeed)) || (sign(leftspeed) == 0) || (sign(rightspeed) == 0)) && abs(leftspeed - rightspeed) < (getJoystickValue(BtnLUp) == 1 ? 50 : 30)) {
-			temp = leftspeed * 0.5 + rightspeed * 0.5;
-			leftspeed = temp;
-			rightspeed = temp;
-		}
-
+		
 		setMotorSpeed(leftdrive, leftspeed);
 		setMotorSpeed(rightdrive, rightspeed);
 		setMotorSpeed(spintake, 100 * spintakeState);
