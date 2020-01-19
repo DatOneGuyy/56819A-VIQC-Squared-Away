@@ -1,0 +1,205 @@
+TMusicalNotes c = noteC;
+TMusicalNotes csharp = noteCSharp;
+TMusicalNotes d = noteD;
+TMusicalNotes dsharp = noteDSharp;
+TMusicalNotes e = noteE;
+TMusicalNotes f = noteF;
+TMusicalNotes fsharp = noteFSharp;
+TMusicalNotes g = noteG;
+TMusicalNotes gsharp = noteGSharp;
+TMusicalNotes a = noteA;
+TMusicalNotes asharp = noteASharp;
+TMusicalNotes b = noteB;
+
+TMusicalOctaves o1 = octave1;
+TMusicalOctaves o2 = octave2;
+TMusicalOctaves o3 = octave3; 
+
+task main()
+{
+	playNote(d, o2, 20); sleep(200);
+	playNote(d, o2, 20); sleep(200);
+	playNote(d, o3, 20); sleep(200);
+	sleep(200);
+	playNote(a, o2, 40); sleep(400);
+	sleep(200);
+	playNote(gsharp, o2, 40); sleep(400);
+	playNote(g, o2, 40); sleep(400);
+	playNote(f, o2, 40); sleep(400);
+	playNote(d, o2, 20); sleep(200);
+	playNote(f, o2, 20); sleep(200);
+	playNote(g, o2, 20); sleep(200);
+	
+	playNote(c, o2, 20); sleep(200);
+	playNote(c, o2, 20); sleep(200);
+	playNote(d, o3, 20); sleep(200);
+	sleep(200);
+	playNote(a, o2, 40); sleep(400);
+	sleep(200);
+	playNote(gsharp, o2, 40); sleep(400);
+	playNote(g, o2, 40); sleep(400);
+	playNote(f, o2, 40); sleep(400);
+	playNote(d, o2, 20); sleep(200);
+	playNote(f, o2, 20); sleep(200);
+	playNote(g, o2, 20); sleep(200);
+	
+	playNote(b, o1, 20); sleep(200);
+	playNote(b, o1, 20); sleep(200);
+	playNote(d, o3, 20); sleep(200);
+	sleep(200);
+	playNote(a, o2, 40); sleep(400);
+	sleep(200);
+	playNote(gsharp, o2, 40); sleep(400);
+	playNote(g, o2, 40); sleep(400);
+	playNote(f, o2, 40); sleep(400);
+	playNote(d, o2, 20); sleep(200);
+	playNote(f, o2, 20); sleep(200);
+	playNote(g, o2, 20); sleep(200);
+	
+	playNote(asharp, o1, 20); sleep(200);
+	playNote(asharp, o1, 20); sleep(200);
+	playNote(d, o3, 20); sleep(200);
+	sleep(200);
+	playNote(a, o2, 40); sleep(400);
+	sleep(200);
+	playNote(gsharp, o2, 40); sleep(400);
+	playNote(g, o2, 40); sleep(400);
+	playNote(f, o2, 40); sleep(400);
+	playNote(d, o2, 20); sleep(200);
+	playNote(f, o2, 20); sleep(200);
+	playNote(g, o2, 20); sleep(200);
+	
+	
+	playNote(d, o3, 320);
+		playNote(d, o2, 20); sleep(200);
+		playNote(d, o2, 20); sleep(200);
+		playNote(d, o3, 20); sleep(200);
+		sleep(200);
+		playNote(a, o2, 40); sleep(400);
+		sleep(200);
+		playNote(gsharp, o2, 40); sleep(400);
+		playNote(g, o2, 40); sleep(400);
+		playNote(f, o2, 40); sleep(400);
+		playNote(d, o2, 20); sleep(200);
+		playNote(f, o2, 20); sleep(200);
+		playNote(g, o2, 20); sleep(200);
+	
+	playNote(c, o3, 320);
+		playNote(c, o2, 20); sleep(200);
+		playNote(c, o2, 20); sleep(200);
+		playNote(d, o3, 20); sleep(200);
+		sleep(200);
+		playNote(a, o2, 40); sleep(400);
+		sleep(200);
+		playNote(gsharp, o2, 40); sleep(400);
+		playNote(g, o2, 40); sleep(400);
+		playNote(f, o2, 40); sleep(400);
+		playNote(d, o2, 20); sleep(200);
+		playNote(f, o2, 20); sleep(200);
+		playNote(g, o2, 20); sleep(200);
+	
+	playNote(b, o2, 320);
+		playNote(b, o1, 20); sleep(200);
+		playNote(b, o1, 20); sleep(200);
+		playNote(d, o3, 20); sleep(200);
+		sleep(200);
+		playNote(a, o2, 40); sleep(400);
+		sleep(200);
+		playNote(gsharp, o2, 40); sleep(400);
+		playNote(g, o2, 40); sleep(400);
+		playNote(f, o2, 40); sleep(400);
+		playNote(d, o2, 20); sleep(200);
+		playNote(f, o2, 20); sleep(200);
+		playNote(g, o2, 20); sleep(200);
+	
+	playNote(asharp, o2, 140);
+		playNote(asharp, o1, 20); sleep(200);
+		playNote(asharp, o1, 20); sleep(200);
+		playNote(d, o3, 20); sleep(200);
+		sleep(200);
+		playNote(a, o2, 40); sleep(400);
+		sleep(200);
+		playNote(c, o3, 180);
+		playNote(gsharp, o2, 40); sleep(400);
+		playNote(g, o2, 40); sleep(400);
+		playNote(f, o2, 40); sleep(400);
+		playNote(d, o2, 20); sleep(200);
+		playNote(f, o2, 20); sleep(200);
+		playNote(g, o2, 20); sleep(200);
+	
+	/*
+	playNote(d, o1, 40); 
+		playNote(d, o2, 20); sleep(200);
+		playNote(d, o2, 20); sleep(200);
+	playNote(d, o2, 40);
+		playNote(d, o3, 20); sleep(200);
+		sleep(200);
+	playNote(d, o1, 40);
+		playNote(a, o2, 40); sleep(400);
+		sleep(200);
+	playNote(d, o2, 20); sleep(200);
+	playNote(d, o1, 40);
+		playNote(gsharp, o2, 40); sleep(400);
+	playNote(g, o2, 40);
+		playNote(d, o1, 20); sleep(200);
+		playNote(d, o2, 20); sleep(200);
+	playNote(f, o2, 40);
+		playNote(d, o1, 20); sleep(200);
+		playNote(d, o1, 20); sleep(200);
+	playNote(d, o2, 20); 
+  	playNote(d, o1, 20); sleep(200);
+	playNote(f, o2, 20); 
+		playNote(d, o2, 20); sleep(200);
+	playNote(g, o2, 20); sleep(200);
+	
+	playNote(c, o1, 40); 
+		playNote(c, o2, 20); sleep(200);
+		playNote(c, o2, 20); sleep(200);
+	playNote(c, o2, 40);
+		playNote(c, o3, 20); sleep(200);
+		sleep(200);
+	playNote(c, o1, 40);
+		playNote(a, o2, 40); sleep(400);
+		sleep(200);
+	playNote(c, o2, 20); sleep(200);
+	playNote(c, o1, 40);
+		playNote(gsharp, o2, 40); sleep(400);
+	playNote(g, o2, 40);
+		playNote(c, o1, 20); sleep(200);
+		playNote(c, o2, 20); sleep(200);
+	playNote(f, o2, 40);
+		playNote(c, o1, 20); sleep(200);
+		playNote(c, o1, 20); sleep(200);
+	playNote(c, o2, 20); 
+  	playNote(d, o1, 20); sleep(200);
+	playNote(f, o2, 20); 
+		playNote(c, o2, 20); sleep(200);
+	playNote(g, o2, 20); sleep(200);
+	
+	playNote(b, o1, 20); sleep(200);
+	playNote(b, o1, 20); sleep(200);
+	playNote(d, o3, 20); sleep(200);
+	sleep(200);
+	playNote(a, o2, 40); sleep(400);
+	sleep(200);
+	playNote(gsharp, o2, 40); sleep(400);
+	playNote(g, o2, 40); sleep(400);
+	playNote(f, o2, 40); sleep(400);
+	playNote(d, o2, 20); sleep(200);
+	playNote(f, o2, 20); sleep(200);
+	playNote(g, o2, 20); sleep(200);
+	
+	playNote(asharp, o1, 20); sleep(200);
+	playNote(asharp, o1, 20); sleep(200);
+	playNote(d, o3, 20); sleep(200);
+	sleep(200);
+	playNote(a, o2, 40); sleep(400);
+	sleep(200);
+	playNote(gsharp, o2, 40); sleep(400);
+	playNote(g, o2, 40); sleep(400);
+	playNote(f, o2, 40); sleep(400);
+	playNote(d, o2, 20); sleep(200);
+	playNote(f, o2, 20); sleep(200);
+	playNote(g, o2, 20); sleep(200);
+	*/
+}
