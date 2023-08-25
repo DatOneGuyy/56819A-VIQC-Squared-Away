@@ -1,5 +1,5 @@
 # iq-code
-vex iq code for squared away
+Team 56819A VEX IQ Squared Away 2019-2020
 
 current specs (2-25-20)
 2 motor drive (omnis) geared 5:3
